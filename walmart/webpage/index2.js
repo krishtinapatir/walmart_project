@@ -1,41 +1,30 @@
+
+
 let products = [];
 
-// Load the JSON data
-fetch('json_data/gadget.json')
-    .then(response => response.json())
-    .then(data => {
-        products = products.concat(data); 
-    })
-    .catch(error => {
-        console.error('Error loading gadget.json:', error);
-    });
-
-fetch('json_data/mix.json')
-    .then(response => response.json())
-    .then(data => {
-        products = products.concat(data); 
-    })
-    .catch(error => {
-        console.error('Error loading mix.json:', error);
-    });
-
-fetch('json_data/makeup.json')
-    .then(response => response.json())
-    .then(data => {
-        products = products.concat(data); 
-    })
-    .catch(error => {
-        console.error('Error loading makeup.json:', error);
-    });
+// Load all JSON data files simultaneously
+Promise.all([
+    fetch('json_data/gadget.json').then(response => response.json()),
+    fetch('json_data/mix.json').then(response => response.json()),
+    fetch('json_data/makeup.json').then(response => response.json())
+])
+.then(dataArrays => {
+    products = [].concat(...dataArrays);
+    console.log('All products loaded:', products); // Debugging to check if products are loaded
+})
+.catch(error => {
+    console.error('Error loading JSON data:', error);
+});
 
 function searchProduct() {
     const query = document.getElementById('search-input').value.toLowerCase();
+    console.log('Search query:', query); // Debugging
     const results = products.filter(product =>
-        product["product_name"].toLowerCase().includes(query) 
+        product["product_name"].toLowerCase().includes(query)
     );
+    console.log('Search results:', results); // Debugging
 
     displayResults(results);
-    clearSuggestions();
 }
 
 function displayResults(results) {
@@ -52,15 +41,161 @@ function displayResults(results) {
             <div class="product-item">
                 <img src="${product['image_url']}" alt="${product['product_name']}" />
                 <h3>${product['product_name']}</h3>
-                <p>${product['price_description']}</p> <!-- Fixed typo here -->
+                <p>${product['price_description']}</p>
                 <p>Rating: ${product['rating']}</p>
                 <a href="${product['URL']}" target="_blank">View Product</a>
-                <p>Available: ${product['availability']}</p> <!-- Fixed key reference -->
+                <button class="btn" data-product='${JSON.stringify(product).replace(/'/g, '&#39;')}'>Add to Selection</button>
             </div>
         `;
         productDetails.innerHTML += productHTML;
     });
+
+    setupEventListeners();
 }
+
+function setupEventListeners() {
+    document.querySelectorAll('.product-item .btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const product = JSON.parse(this.getAttribute('data-product'));
+            addProductToSelection(product);
+        });
+    });
+}
+
+function compareProducts() {
+    const productItems = document.querySelectorAll('.product-item');
+    if (productItems.length === 0) {
+        alert('No products to compare.');
+        return;
+    }
+
+    let lowestPriceProduct = null;
+    let lowestPrice = Infinity;
+
+    productItems.forEach(item => {
+        const priceDescription = item.querySelector('p:nth-of-type(2)').textContent;
+        const price = parseFloat(priceDescription.replace(/[^0-9.-]+/g, ""));
+
+        if (price < lowestPrice) {
+            lowestPrice = price;
+            lowestPriceProduct = {
+                name: item.querySelector('h3').textContent,
+                price: price,
+                link: item.querySelector('a').href
+            };
+        }
+    });
+
+    if (lowestPriceProduct) {
+        const comparisonTable = document.getElementById('comparison-table');
+        comparisonTable.innerHTML = `
+            <tr>
+                <th>Product Name</th>
+                <th>Lowest Price</th>
+                <th>Link</th>
+            </tr>
+            <tr>
+                <td>${lowestPriceProduct.name}</td>
+                <td>${lowestPriceProduct.price}</td>
+                <td><a href="${lowestPriceProduct.link}" target="_blank">View Product</a></td>
+            </tr>
+        `;
+    } else {
+        alert('Could not find the lowest price.');
+    }
+}
+
+let selectedProducts = [];
+
+function addProductToSelection(product) {
+    if (selectedProducts.length < 5) { // Limit to 5 products
+        selectedProducts.push(product);
+        console.log('Product added to selection:', product); // Debugging
+        displaySelectedProducts();
+    } else {
+        alert('You can only select up to 5 products.');
+    }
+}
+
+function removeProductFromSelection(productName) {
+    selectedProducts = selectedProducts.filter(p => p['product_name'] !== productName);
+    console.log('Product removed from selection:', productName); // Debugging
+    displaySelectedProducts();
+}
+
+function displaySelectedProducts() {
+    const selectedProductsDiv = document.getElementById('selected-products');
+    selectedProductsDiv.innerHTML = '';
+
+    if (selectedProducts.length === 0) {
+        selectedProductsDiv.innerHTML = '<p>No products selected.</p>';
+        return;
+    }
+
+    selectedProducts.forEach(product => {
+        const productHTML = `
+            <div class="selected-product-item">
+                <img src="${product['image_url']}" alt="${product['product_name']}" />
+                <h3>${product['product_name']}</h3>
+                <p>${product['price_description']}</p>
+                <p>Rating: ${product['rating']}</p>
+                <button onclick="removeProductFromSelection('${product['product_name']}')">Remove</button>
+            </div>
+        `;
+        selectedProductsDiv.innerHTML += productHTML;
+    });
+
+    console.log('Selected products:', selectedProducts); // Debugging
+}
+
+function showBestOption() {
+    if (selectedProducts.length === 0) {
+        document.getElementById('best-product-details').innerHTML = '<p>Please add products to compare.</p>';
+        return;
+    }
+
+    // Define weights for price and rating
+    const priceWeight = 0.4;
+    const ratingWeight = 0.6;
+
+    function calculateScore(product) {
+        const price = parseFloat(product['price_description'].replace(/[^0-9.-]+/g, ""));
+        const rating = parseFloat(product['rating']);
+        
+        // Normalize price (lower price is better)
+        const normalizedPrice = 1 / (1 + price); // Inverse normalization
+        // Normalize rating (higher rating is better)
+        const normalizedRating = rating / 5; // Assuming a rating scale of 1 to 5
+
+        return (normalizedPrice * priceWeight) + (normalizedRating * ratingWeight);
+    }
+
+    let bestProduct = selectedProducts[0]; 
+    let highestScore = calculateScore(bestProduct);
+
+    selectedProducts.forEach(product => {
+        const score = calculateScore(product);
+        console.log('Product score:', product['product_name'], score); // Debugging
+        if (score > highestScore) {
+            highestScore = score;
+            bestProduct = product;
+        }
+    });
+
+    const bestProductDetails = document.getElementById('best-product-details');
+    bestProductDetails.innerHTML = `
+        <div class="best-product-item">
+            <img src="${bestProduct['image_url']}" alt="${bestProduct['product_name']}" />
+            <h3>${bestProduct['product_name']}</h3>
+            <p>${bestProduct['price_description']}</p>
+            <p>Rating: ${bestProduct['rating']}</p>
+            <a href="${bestProduct['URL']}" target="_blank">View Product</a>
+            <p>Score: ${highestScore.toFixed(2)}</p>
+        </div>
+    `;
+    console.log('Best product selected:', bestProduct); // Debugging
+}
+
 
 function showSuggestions() {
     const input = document.getElementById('search-input');

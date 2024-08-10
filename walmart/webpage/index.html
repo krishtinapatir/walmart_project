@@ -5,6 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Comparison</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Search bar styling */
+        .search-bar {
+            margin-bottom: 20px;
+            display: flex;
+            width: 100%;
+        }
+
+        #search-input {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Flexbox container for products */
+        #product-details, #selected-products, #best-product-details {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        /* Styling for individual product items */
+        .product-item, .selected-product-item, .best-product-item {
+            flex: 1 1 calc(33.333% - 20px); /* 3 items per row */
+            box-sizing: border-box;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .product-item img, .selected-product-item img, .best-product-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .product-item, .selected-product-item, .best-product-item {
+                flex: 1 1 calc(50% - 20px); /* 2 items per row on medium screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-item, .selected-product-item, .best-product-item {
+                flex: 1 1 100%; /* 1 item per row on small screens */
+            }
+        }
+
+        /* Section headings */
+        h2 {
+            margin-top: 40px;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Comparison table */
+        #comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #comparison-table th, #comparison-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        /* Button group for comparison and best option */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">

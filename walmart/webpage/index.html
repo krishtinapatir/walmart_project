@@ -2,145 +2,96 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" type="x-icon" href="walmartLogo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Comparison</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* Search bar styling */
-        .search-bar {
-            margin-bottom: 20px;
-            display: flex;
-            width: 100%;
-        }
-
-        #search-input {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Flexbox container for products */
-        #product-details, #selected-products, #best-product-details {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 20px;
-            width: 100%;
-        }
-
-        /* Styling for individual product items */
-        .product-item, .selected-product-item, .best-product-item {
-            flex: 1 1 calc(33.333% - 20px); /* 3 items per row */
-            box-sizing: border-box;
-            margin: 10px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            text-align: center;
-            background-color: #f9f9f9;
-        }
-
-        .product-item img, .selected-product-item img, .best-product-item img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .product-item, .selected-product-item, .best-product-item {
-                flex: 1 1 calc(50% - 20px); /* 2 items per row on medium screens */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .product-item, .selected-product-item, .best-product-item {
-                flex: 1 1 100%; /* 1 item per row on small screens */
-            }
-        }
-
-        /* Section headings */
-        h2 {
-            margin-top: 40px;
-            font-size: 24px;
-            color: #333;
-            text-align: center;
-            width: 100%;
-        }
-
-        /* Comparison table */
-        #comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        #comparison-table th, #comparison-table td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        /* Button group for comparison and best option */
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <div class="search-bar">
-            <input type="text" id="search-input" placeholder="Search for products..." />
-           
+            <input type="text" id="search-input" class="search-box" required placeholder="Search for products..." />
             <button class="btn" onclick="searchProduct()">Search</button>
-           
+            <button class="close-icon" onclick="clearSearchInput()"></button>
+
+            <!-- <button class = "close-icon" type=""reset></button> -->
         </div>
    <div id="suggestions-container" class="autocomplete-suggestions"></div> 
 
+
+ 
+<!------------------------------------------------------------------------------- first 4 images ----------------------------------------------------------------------->
+<div class="carousel-container" id="carousel1">
+    <button class="carousel-button prev" onclick="prevSlide('carousel1')">&#10094;</button>
+    <div class="image-carousel">
+        <div class="carousel-track">
+            <div class="carousel-slide">
+                <img src="images/Screenshot (502).png" alt="Description of image 1">
+                <img src="images/Screenshot (503).png" alt="Description of image 2">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/Screenshot (504).png" alt="Description of image 3">
+                <img src="images/walmart-discount-card-promotion.jpg.webp" alt="Description of image 4">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/Screenshot (500).png" alt="Description of image 3">
+                <img src="images/Screenshot (501).png" alt="Description of image 4">
+            </div>
+            <div class="carousel-slide">
+                <img src="images/Screenshot (498).png" alt="Description of image 3">
+                <img src="images/Screenshot (499).png" alt="Description of image 4">
+            </div>
+        </div>
+    </div>
+    <button class="carousel-button next" onclick="nextSlide('carousel1')">&#10095;</button>
+</div>
+<!-- --------------------------------------------------------------------------------------------javascript for promotion----------------------------- -->
+<script>
+    function nextSlide(carouselId) {
+        const track = document.querySelector(`#${carouselId} .carousel-track`);
+        const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
+        const totalSlides = slides.length;
+        const currentIndex = parseInt(track.getAttribute('data-current-index')) || 0;
+
+        if (currentIndex < totalSlides - 1) {
+            track.setAttribute('data-current-index', currentIndex + 1);
+        } else {
+            track.setAttribute('data-current-index', 0); // Loop back to the first slide
+        }
+        updateCarouselPosition(carouselId);
+    }
+
+    function prevSlide(carouselId) {
+        const track = document.querySelector(`#${carouselId} .carousel-track`);
+        const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
+        const totalSlides = slides.length;
+        const currentIndex = parseInt(track.getAttribute('data-current-index')) || 0;
+
+        if (currentIndex > 0) {
+            track.setAttribute('data-current-index', currentIndex - 1);
+        } else {
+            track.setAttribute('data-current-index', totalSlides - 1); // Loop back to the last slide
+        }
+        updateCarouselPosition(carouselId);
+    }
+
+    function updateCarouselPosition(carouselId) {
+        const track = document.querySelector(`#${carouselId} .carousel-track`);
+        const slideWidth = document.querySelector(`#${carouselId} .carousel-slide`).offsetWidth;
+        const currentIndex = parseInt(track.getAttribute('data-current-index')) || 0;
+        const moveAmount = slideWidth * currentIndex;
+        
+        track.style.transform = `translateX(-${moveAmount}px)`;
+    }
+</script>
+
+<!------------------------------------------------------------------------------------------ product details -------------------------------------------------------------------------->
         <div class="product-details" id="product-details">
             <!-- Product details will be displayed here -->
         </div>
 
 
-
-
-        <div class="comparison-section">
-            <h2>Comparison Section</h2>
-            <button class="btn" onclick="compareProducts()">Compare</button>
-            <table id="comparison-table">
-            
-            </table>
-        </div>
-        <!-- whats best -->
+<!------------------------------------------------------------------- whats best -->
         <div class="recommendation-section">
             <h2>Add and See What's Best for You</h2>
             <div id="selected-products">
@@ -156,14 +107,37 @@
             </div>
         </div>
         
+        <div class="Review-container">
+            <button class="btn">Review</button>
+            <div id="Review-details">
+                <!-- --Review-details ---->
+            </div>
+        </div>
 
 
-
-                 <!-- Similar products will be displayed here -->
+        <!-- ---------------------------------Similar products will be displayed here -------------------------------------------->
         <!-- <div class="similar-products" id="similar-products">
            
         </div> -->
     </div>
+
+
+    <script>
+        function clearSearchInput() {
+        document.getElementById("search-input").value = "";
+        }
+
+        function searchProduct() {
+            // Hide the image container
+            document.getElementById("image-container").style.display = "none";
+            
+            // Show the search results (for demonstration purposes, we'll just display a placeholder message)
+            const productDetails = document.getElementById("product-details");
+            productDetails.innerHTML = "<p>Search results will be displayed here...</p>";
+            productDetails.style.display = "block";
+        }
+
+    </script>
 
     <script src="index2.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>

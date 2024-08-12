@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<header>
+    <h1>Product Reviews</h1> 
+    <div class="pointsDisplay">Points: 0</div> <!-- Display points here -->
+</header>
+<body>
+
+    <div class="review-container">
+        <div class="form-disclaimer-wrapper">
+            <form class="review-form" id="reviewForm">
+                <label for="name">Your Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="review">Write your review:</label>
+                <textarea id="review" rows="4" cols="50" required></textarea>
+
+                <label for="rating">Rating:</label>
+                <div class="review-rating" id="starRating">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+
+                <label for="image">Upload an image (optional):</label>
+                <input type="file" id="image" accept="image/*">
+
+                <button type="submit">Submit Review</button>
+            </form>
+
+            <div class="disclaimer" id="disclaimer">
+                <h3>Guidelines</h3>
+                <p> 
+                    ! Please ensure your review adheres to our guidelines. Any review that violates the guidelines may be removed.
+                    <br> ~ Each submission carries ten points, and after getting 100 points, you receive a discount coupon for shopping.
+                </p> 
+            </div>
+        </div>
+
+        <div class="review-list" id="reviewList">
+            <h3>Customer Reviews:</h3>
+            <!-- Reviews will be appended here -->
+            <div class="review-item">
+                <div class="review-content"></div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

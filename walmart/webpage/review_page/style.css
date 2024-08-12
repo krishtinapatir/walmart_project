@@ -1,0 +1,331 @@
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    min-height: 200vh;
+    padding-top: 20px;
+    background-color: #6ea8e598;
+
+}
+
+h1 {
+
+    text-align: center;
+    color: #343a40;
+    margin-bottom: 30px;
+    width: 100%;
+
+}
+header{
+    font-family: "Kalnia Glaze", serif;
+ display: flex;
+ flex-direction: row;
+}
+
+.review-container {
+  
+
+
+    padding: 20px;
+  
+    margin-bottom: 20px;
+ 
+}
+
+.review-form {  
+    margin-left: 500px;
+       height: 40vh;
+       max-width: 1000px;
+    width: 100%;
+    width: 1000px;
+    border-radius: 10px;
+    box-shadow: 0 9px 9px rgba(0, 0, 0, 0.281);
+    padding: 50px;
+    display: flex;
+    height: 40vh;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+     background-color: #fbfbfb59;
+}
+
+.review-form label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.review-form input[type="file"] {
+    font-size: 16px;
+}
+
+.review-rating {
+    display: flex;
+    gap: 10px;
+}
+
+.star {
+    font-size: 30px;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+}
+
+.star.selected {
+    color: #ffcc00;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+ .review-list{
+    align-items: center;
+    padding-left: 600px;
+ }
+
+.review-list h2 {
+    margin-top: 30px;
+    color: #343a40;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.review-item {
+    background-color: #f1f3f5;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative;
+    box-shadow: 0 8px 8px rgba(26, 26, 26, 0.134);
+}
+
+.review-item h3 {
+    margin: 0;
+    color: #343a40;
+    font-size: 18px;
+}
+
+.review-rating {
+    margin-top: 10px;
+}
+
+.review-content {
+    margin-top: 10px;
+    color: #495057;
+}
+h3{
+    align-items: center;
+}
+.review-image {
+    margin-top: 10px;
+    max-width: 100px;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+
+
+
+
+
+.review-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-flow: dense;
+    gap: 40px;
+    margin-top: 30px;
+    padding-right: 100px;
+    margin-right: 100px;
+   
+}
+
+.review-list h2 {
+    grid-column: 1 / -1;
+    color: #343a40;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-family: "Rowdies", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bolder;
+    font-style: normal;
+}
+
+
+
+.review-item {
+    background-color: #f1f3f570;
+    padding: 15px;
+   
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+
+}
+
+.review-item h3 {
+    margin: 0;
+    color: #343a40;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.review-content {
+    margin-top: 10px;
+    color: #495057;
+    text-align: center;
+}
+
+.review-image {
+    margin-top: 10px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+    .review-container {
+        padding: 15px;
+    }
+
+    .review-form label,
+    .review-form input[type="text"],
+    .review-form textarea {
+        font-size: 14px;
+    }
+
+    .review-rating {
+        gap: 5px;
+    }
+
+    .star {
+        font-size: 24px;
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+    }
+
+    .review-item h3 {
+        font-size: 16px;
+    }
+
+    .delete-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+
+
+.form-disclaimer-wrapper {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    margin-bottom: 20px; /* Space below the form and disclaimer */
+}
+
+/* Style the form */
+.review-form {
+    flex: 1; /* Allow the form to take available space */
+    margin-right: 20px; /* Space between the form and disclaimer */
+}
+
+/* Style the disclaimer */
+.disclaimer {
+    font-size: 1.5rem;
+    height: 400px;
+    width: 350px; /* Adjust width as needed */
+    padding: 15px; /* Add padding for better readability */
+    background-color: #f8f8f8; /* Background color for the box */
+    border: 1px solid #ddd; /* Border around the box */
+    border-radius: 5px; /* Rounded corners for the box */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow for better appearance */
+}
+
+/* Style the disclaimer header */
+.disclaimer h3 {
+    margin-top: 0; /* Remove margin above header */
+}
+
+
+
+.pointsDisplay{
+ border: #0056b3;
+ padding-top: 18px;
+ background-color: pink;
+ margin-right: 20px;
+ border-radius: 10px;
+ width: 80px;
+ height: 30px;
+ text-align: center;
+}
+
+
+/* Style for the message notification */
+.message {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50; /* Green background */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 1000;
+    display: none;
+}
+
+/* Ensure the message is visible when it contains text */
+.message.show {
+    display: block;
+}

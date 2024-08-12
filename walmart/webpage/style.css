@@ -6,13 +6,282 @@ body {
     background-color: #f4f4f4;
     color: #333;
 }
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 100 auto;
+    padding: 100px;
+    padding-top: 40px;
+    background: linear-gradient(to bottom, #003d50, #0099ff, #003d50); /* Gradient from dark blue to light blue to dark blue */
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 -10px 20px rgba(255, 255, 255, 0.3); /* Optional: shadow for 3D effect */
+}
 
 
-/* Product Details */
+.search-bar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #003d50, #0099ff, #003d50); /* Gradient from dark blue to light blue to dark blue */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 -6px 12px rgba(255, 255, 255, 0.2); /* Optional: shadow for 3D effect */
+}
+
+/*-------------------------------------------------------------------------- CSS for the close icon--------------------------------------------- */
+.close-icon{
+    border: 1px solid transparent;
+    background-color: transparent;
+    display: inline;
+    vertical-align: middle;
+    outline: 0;
+    cursor: pointer;
+}
+.close-icon:after{
+    content: "X";
+    width: 20px; height: 20px; position: absolute;
+    background-color: rgb(204, 199, 199); margin: auto;
+    right: 14%; 
+    top:5px; border-radius: 50%; text-align: center; bottom: 0; margin: auto; padding: 5px; font-weight: normal;
+    font-size: 14px; box-shadow: 0 0 2px rgb(204, 199, 199);cursor: pointer;
+}
+
+.search-bar:not(:valid) ~ .close-icon{
+    display: none;
+}
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 5000px;
+    border: 1px solid #ccc;
+    background: linear-gradient(to bottom, #003d50, #0099ff, #003d50); /* Gradient from dark blue to light blue to dark blue */
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 -4px 8px rgba(255, 255, 255, 0.3); /* Optional: shadow for 3D effect */
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #bb9595;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Slightly stronger inner shadow on hover */
+}
+
+
+.container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*------------------------------------ Search bar styling----------------------------------------------- */
+.search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    width: 100%;
+}
+
+#search-input {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #9bbfcb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.btn:hover {
+    background-color: #9bbfcb;
+}
+/*------------------------------------------------------------promotion section--------------------------------------------------------------------*/
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.image-carousel {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    display: flex;
+    min-width: 100%;
+    justify-content: flex-start; /* Adjust to align items */
+    gap: 10px; /* Space between slides, adjust as needed */
+}
+
+.carousel-slide img {
+    width: 49%; /* Adjusted to reduce the gap between images */
+    border-radius: 8px;
+}
+
+.carousel-slide img:nth-child(odd) {
+    margin-bottom: 10px; /* Gap below each image */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1; /* Ensure buttons are above the images */
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+/* ---------------------------------------------------Flexbox container for products */
+#product-details, #selected-products, #best-product-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 70%;
+}
+
+/* ---------------------------------------------------------------------Styling for individual product items */
+#selected-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the selected products */
+    align-items: center; /* Vertically center items */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 70%; /* Adjust based on your layout */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.selected-product-item {
+    flex: 1 1 calc(50% - 20px); /* 2 items per row */
+    margin: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    text-align: center;
+    margin-left: auto; /* Ensure the items are right-aligned if necessary */
+}
+
+.product-item, .selected-product-item, .best-product-item {
+    flex: 1 1 calc(50% - 20px); /* 2 items per row */
+    box-sizing: border-box;
+    padding: 15px;
+    margin: 10px; /* Add a small margin to create gaps */
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    text-align: center;
+    background-color: #f9f9f9;
+} 
+
+.product-item img, .selected-product-item img, .best-product-item img {
+    max-width: 30%;
+    height: auto;
+    margin-bottom:10px ; 
+    border-radius: 8px;
+    float: middle;
+}
+
+
+.selected-product-item {
+    margin-left: auto; /* Pushes each selected product to the right */
+}
+
+.recommendation-section {
+    text-align: center; /* Center-aligns text and inline elements like buttons */
+}
+
+.recommendation-section .btn {
+    margin: 20px auto; /* Adds margin to top and bottom, auto for left and right to center the button */
+    display: block; /* Makes the button a block-level element so that auto margin works */
+}
+
+
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .product-item, .selected-product-item, .best-product-item {
+        flex: 1 1 calc(50% - 20px); /* 2 items per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .product-item, .selected-product-item, .best-product-item {
+        flex: 1 1 100%; /* 1 item per row on small screens */
+    }
+}
+
+/* Section headings */
+h2 {
+    margin-top: 40px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    width: 100%;
+}
+
+/* Comparison table */
+#comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#comparison-table th, #comparison-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Button group for comparison and best option */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .product-details {
     display: flex;
-    align-items: center;
+    align-items: center; /* Vertically centers the content */
+    justify-content: center; /* Horizontally centers the content */
     padding: 20px 0;
+    margin: 50px;
     border-bottom: 1px solid #ddd;
 }
 
@@ -22,14 +291,14 @@ body {
 }
 
 .product-details h2 {
-    margin: 0 0 10px;
+    margin: 10px 0 10px;
 }
 
 .product-details p {
     margin: 5px 0;
 }
 
-/* Comparison Section */
+/* ---------------------------------Comparison Section --------------------------------------------------------------------------------*/
 .comparison-section {
     margin-top: 20px;
 }
@@ -54,7 +323,7 @@ body {
     background-color: #fff;
 }
 
-/* Similar Products */
+/*----------------------------------------------Similar Products --------------------------------------------------*/
 .similar-products {
     margin-top: 20px;
 }
@@ -87,58 +356,95 @@ body {
 
 
 .container {
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
+    margin: 100 auto;
+    padding: 100px;
+    padding-top: 40px;
+    background-color: #82b5b6;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
-
-/* Search Bar */
+/* -------------------------------------------------Search Bar------------------------------------------------------ */
 .search-bar {
-     position: relative;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding: 15px; /* Increased padding */
+    border-radius: 10px; /* Slightly larger border radius */
+    background-color: #9bbfcb; /* Light blue background */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased box shadow for more depth */
 }
 
 #search-input {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+    width: 80%; /* Slightly increased width */
+    padding: 15px; /* Increased padding */
+    border: 1px solid #b3e0ff; /* Light blue border */
+    border-radius: 10px; /* Matching border radius */
+    font-size: 18px; /* Increased font size */
+    outline: none;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+#search-input:focus {
+    border-color: #9bbfcb;
 }
 
 .btn {
-   
-    padding: 10px 20px;
+    padding: 15px 30px; /* Increased padding */
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px; /* Matching border radius */
     cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  
+    font-size: 18px; /* Increased font size */
+    box-shadow: 0 6px 8px rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn:hover {
     background-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
 }
- 
+
+/*---------------------------------------------Suggestions Container------------------------------------------------- */
+.suggestions-container {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 600%;
+    border: 1px solid #b3e0ff; /* Light blue border */
+    background: #e0f7ff; /* Light blue background */
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    border-radius: 0 0 10px 10px; /* Matching border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-suggestion {
+    padding: 12px; /* Increased padding */
+    cursor: pointer;
+    background: #e0f7ff; /* Light blue background */
+    font-size: 16px; /* Increased font size */
+    transition: background-color 0.3s ease;
+}
+
+.autocomplete-suggestion:hover {
+    background-color: #b3e0ff; /* Slightly darker blue on hover */
+}
+/* Search Bar */
 
 /* --------------------------------------change -------------------------------------- */
 .suggestions-container {
    
     top: 100%; /* Position below the search input */
     left: 0;
-    width: 100px;
+    width: 5000px;
     border: 1px solid #ccc;
     /* background: white; */
     background: #0057b339;

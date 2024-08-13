@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walmart Page</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            overflow: hidden; /* Prevent scrollbars */
+        }
+
+        .background-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-template-rows: repeat(2, 1fr); /* 2 rows */
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .background-grid div {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7; /* Slightly reduced transparency */
+        }
+
+        .background-grid div::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 255, 0.7); /* More intense blue layer */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.3); /* Lighter overlay background */
+            z-index: 1;
+        }
+
+        .logo-container {
+            z-index: 2;
+            position: relative;
+        }
+
+        .logo-container img { 
+            width: 550px;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="background-grid">
+        <!-- Replace 'image1.jpg', 'image2.jpg', etc. with the actual paths to your images -->
+        
+
+        <div><img src="images/1.webp" alt="Image 5"></div>
+        <div><img src="images/2.jpeg" alt="Image 6"></div>
+        <div><img src="images/3.jpeg" alt="Image 3"></div>
+        <div><img src="images/4.jpeg" alt="Image 4"></div>
+        <div><img src="images/5.jpeg" alt="Image 5"></div>
+        <div><img src="images/6.jpeg" alt="Image 6"></div>
+        
+        <!-- <div><img src="images/7.jpeg" alt="Image 7"></div>
+        <div><img src="images/8.jpeg" alt="Image 8"></div>
+        <div><img src="images/9.jpeg" alt="Image 9"></div>
+        <div><img src="images/10.jpeg" alt="Image 10"></div>
+        
+        <div><img src="images/11.jpeg" alt="Image 11"></div>
+        <div><img src="images/12.jpeg" alt="Image 12"></div>
+        <div><img src="images/13.jpeg" alt="Image 13"></div>
+         -->
+    </div>
+
+    <div class="overlay"></div>
+    <div class="logo-container">
+        <img src="images/images-removebg-preview (2).png" alt="Walmart Logo"> <!-- Replace with the actual path to the Walmart logo -->
+    </div>
+    <script>
+        // Navigate to the images page when the user clicks anywhere on the screen
+        document.addEventListener('click', function() {
+            window.location.href = "login.html"; // Replace with the actual path to your images page
+        });
+    </script>
+</body>
+</html>
+
+

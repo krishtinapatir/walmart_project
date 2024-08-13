@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images Page</title>
+    <style>
+        body, html {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0; /* Light grey background for contrast */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns */
+            grid-auto-rows: minmax(200px, auto); /* Minimum row height */
+            width: 100vw;
+            gap: 0; /* No gap between images */
+        }
+
+        .images-grid a {
+            display: block;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ccc; /* Border around images for better separation */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+        }
+
+        .images-grid a:hover {
+            transform: scale(1.05); /* Slight zoom on hover */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+        }
+
+        .images-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .images-grid a::before {
+            content: attr(data-city); /* Use the 'data-city' attribute for city names */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white; /* Text color */
+            font-size: 2rem; /* Adjusted font size */
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Darker shadow for contrast */
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            padding: 10px 20px; /* Padding around text */
+            border-radius: 5px; /* Slightly rounded corners */
+            z-index: 1;
+            text-align: center;
+            width: calc(100% - 20px); /* Adjust width for padding */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        /* Pop-up Styles */
+        #popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(7, 7, 7, 0.3); /* Light semi-transparent white background */
+            backdrop-filter: blur(10px); /* Apply blur effect */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Above all other content */
+        }
+
+        #popup .content {
+            background-color: rgba(255, 255, 255, 0.9); /* More solid white background */
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 1.5rem; /* Smaller font size */
+            color: black;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Pop-up -->
+    <div id="popup">
+        <div class="content">Select Your City</div>
+    </div>
+
+    <div class="images-grid">
+        <a href="register.html" data-city="Chandigarh"><img src="images/2.jpeg" alt="Chandigarh"></a>
+        <a href="register.html" data-city="Delhi"><img src="images/3.jpeg" alt="Delhi"></a>
+        <a href="register.html" data-city="Karnataka"><img src="images/4.jpeg" alt="Karnataka"></a>
+        <a href="register.html" data-city="Madhya Pradesh"><img src="images/5.jpeg" alt="Madhya Pradesh"></a>
+
+        <a href="register.html" data-city="Telangana"><img src="images/6.jpeg" alt="Telangana"></a>
+        <a href="register.html" data-city="Maharashtra"><img src="images/1.webp" alt="Maharashtra"></a>
+        <a href="register.html" data-city="Punjab"><img src="images/8.jpeg" alt="Punjab"></a>
+
+        <a href="register.html" data-city="Uttar Pradesh"><img src="images/9.jpeg" alt="Uttar Pradesh"></a>
+        <a href="register.html" data-city="Andhra Pradesh"><img src="images/10.jpeg" alt="Andhra Pradesh"></a>
+        <a href="register.html" data-city="Tamil Nadu"><img src="images/11.jpeg" alt="Tamil Nadu"></a>
+
+        <a href="register.html" data-city="Jammu & Kashmir"><img src="images/12.jpeg" alt="Jammu & Kashmir"></a>
+        <a href="register.html" data-city="Chandigarh"><img src="images/7.jpeg" alt="Chandigarh"></a>
+    </div>
+
+    <script>
+        // Hide the pop-up when the user clicks anywhere on the screen
+        document.addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

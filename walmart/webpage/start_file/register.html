@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .login-container label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .get-location-btn {
+            margin-top: -15px;
+            margin-bottom: 20px;
+            background-color: #28a745;
+        }
+
+        .get-location-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm" onsubmit="handleSubmit(event)">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+        <label for="contact">Email or Phone Number</label>
+        <input type="text" id="contact" name="contact" placeholder="Enter your email or phone number" required>
+
+        <label for="location">Current Location</label>
+        <input type="text" id="location" name="location" placeholder="Click 'Get Location' to fetch your location" readonly>
+        <button type="button" class="get-location-btn" onclick="getLocation()">Get Location</button>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        // Using Nominatim API to get the full address
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const fullAddress = data.display_name;
+                document.getElementById('location').value = fullAddress;
+            })
+            .catch(error => {
+                document.getElementById('location').value = "Unable to retrieve address.";
+            });
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault(); // Prevent default form submission
+        window.location.href = 'index.html'; // Redirect to index.html
+    }
+</script>
+
+</body>
+</html>

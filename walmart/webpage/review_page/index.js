@@ -1,3 +1,5 @@
+
+
 const starRating = document.getElementById('starRating');
 let selectedRating = 0;
 
@@ -7,6 +9,73 @@ function loadPoints() {
     document.getElementById('pointsDisplay').textContent = `Points: ${points}`;
 }
 
+// Save reviews to localStorage
+function saveReviews() {
+    const reviews = [];
+    document.querySelectorAll('.review-item').forEach(item => {
+        const review = {
+            name: item.querySelector('h3').textContent,
+            rating: item.querySelector('.review-rating').children.length,
+            text: item.querySelector('div').textContent,
+            imageSrc: item.querySelector('.review-image') ? item.querySelector('.review-image').src : ''
+        };
+        reviews.push(review);
+    });
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+}
+
+// Load reviews from localStorage
+function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.forEach(review => {
+        const reviewItem = document.createElement('div');
+        reviewItem.classList.add('review-item');
+
+        // Add the name
+        const reviewName = document.createElement('h3');
+        reviewName.textContent = review.name;
+        reviewItem.appendChild(reviewName);
+
+        // Add the rating
+        const reviewRating = document.createElement('div');
+        reviewRating.classList.add('review-rating');
+        for (let i = 0; i < review.rating; i++) {
+            const star = document.createElement('span');
+            star.classList.add('star', 'selected');
+            star.innerHTML = '&#9733;';
+            reviewRating.appendChild(star);
+        }
+        reviewItem.appendChild(reviewRating);
+
+        // Add the review text
+        const reviewContent = document.createElement('div');
+        reviewContent.textContent = review.text;
+        reviewItem.appendChild(reviewContent);
+
+        // Add the image if available
+        if (review.imageSrc) {
+            const reviewImage = document.createElement('img');
+            reviewImage.classList.add('review-image');
+            reviewImage.src = review.imageSrc;
+            reviewItem.appendChild(reviewImage);
+        }
+
+        // Add the delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-btn');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.addEventListener('click', function() {
+            reviewItem.remove();
+            saveReviews(); // Save reviews after deletion
+        });
+        reviewItem.appendChild(deleteBtn);
+
+        // Append the review to the review list
+        reviewList.appendChild(reviewItem);
+    });
+}
+
+// Handle star rating selection
 starRating.addEventListener('click', function(event) {
     if (event.target.classList.contains('star')) {
         const stars = starRating.querySelectorAll('.star');
@@ -21,10 +90,8 @@ starRating.addEventListener('click', function(event) {
     }
 });
 
+// Handle review form submission
 const reviewForm = document.getElementById('reviewForm');
-const reviewList = document.getElementById('reviewList');
-const pointsDisplay = document.getElementById('pointsDisplay');
-
 reviewForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -74,10 +141,9 @@ reviewForm.addEventListener('submit', function(event) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 reviewImage.src = e.target.result;
+                reviewItem.appendChild(reviewImage);
             };
             reader.readAsDataURL(imageFile);
-
-            reviewItem.appendChild(reviewImage);
         }
 
         // Add the delete button
@@ -86,11 +152,15 @@ reviewForm.addEventListener('submit', function(event) {
         deleteBtn.textContent = 'Delete';
         deleteBtn.addEventListener('click', function() {
             reviewItem.remove();
+            saveReviews(); // Save reviews after deletion
         });
         reviewItem.appendChild(deleteBtn);
 
         // Append the new review to the review list
         reviewList.appendChild(reviewItem);
+
+        // Save the review to localStorage
+        saveReviews();
 
         // Update points
         let points = parseInt(localStorage.getItem('userPoints') || '0', 10);
@@ -131,10 +201,11 @@ function displayMessage(message) {
     }, 5000); // Message disappears after 5 seconds
 }
 
-// Load points when the page loads
-window.onload = loadPoints;
-
-
+// Load points and reviews when the page loads
+window.onload = function() {
+    loadPoints();
+    loadReviews();
+};
 
 
 

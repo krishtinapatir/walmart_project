@@ -9,6 +9,17 @@
 </head>
 <body>
     <div class="container">
+        <!-- --------------------------------------------reviewicon -------------------------------------------- -->
+        <div class="review-pointer">
+            <span class="review-text">Write Review</span>
+            <span class="arrow">➤</span>
+        </div>
+        <a href="review_page/index.html" class="contact-icon" title="Contact Us">
+            <box-icon name='message' type='solid' color='#ffffff'></box-icon> 
+       
+        </a>
+    
+          <!-- --------------------------------------------reviewicon -------------------------------------------- -->
         <div class="search-bar">
             <input type="text" id="search-input" class="search-box" required placeholder="Search for products..." />
             <button class="btn" onclick="searchProduct()">Search</button>
@@ -16,13 +27,14 @@
 
             <!-- <button class = "close-icon" type=""reset></button> -->
         </div>
+
    <div id="suggestions-container" class="autocomplete-suggestions"></div> 
 
 
  
 <!------------------------------------------------------------------------------- first 4 images ----------------------------------------------------------------------->
-<div class="carousel-container" id="carousel1">
-    <button class="carousel-button prev" onclick="prevSlide('carousel1')">&#10094;</button>
+<div class="carousel-container" id="promotion-carousel">
+    <button class="carousel-button prev" onclick="prevSlide('promotion-carousel')">&#10094;</button>
     <div class="image-carousel">
         <div class="carousel-track">
             <div class="carousel-slide">
@@ -43,9 +55,12 @@
             </div>
         </div>
     </div>
-    <button class="carousel-button next" onclick="nextSlide('carousel1')">&#10095;</button>
+    <button class="carousel-button next" onclick="nextSlide('promotion-carousel')">&#10095;</button>
 </div>
+
+
 <!-- --------------------------------------------------------------------------------------------javascript for promotion----------------------------- -->
+
 <script>
     function nextSlide(carouselId) {
         const track = document.querySelector(`#${carouselId} .carousel-track`);

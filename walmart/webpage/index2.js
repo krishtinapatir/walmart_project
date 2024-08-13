@@ -41,9 +41,10 @@ function displayResults(results) {
             <div class="product-item">
                 <img src="${product['image_url']}" alt="${product['product_name']}" />
                 <h3>${product['product_name']}</h3>
-                <p>${product['price_description']}</p>
-                <p>Rating: ${product['rating']}</p>
-                <a href="${product['URL']}" target="_blank">View Product</a>
+                <p><b>${product['price_description']}</b></p>
+                <p><b>Rating:</b> ${product['rating']}</p>
+                <p> <b>Available:</b> EBT Available</p>
+              <button class="butn">  <a href="${product['URL']}" target="_blank">View Product</a> </button>
                 <button class="btn" data-product='${JSON.stringify(product).replace(/'/g, '&#39;')}'>Add to Selection</button>
             </div>
         `;
@@ -139,7 +140,9 @@ function displaySelectedProducts() {
                 <h3>${product['product_name']}</h3>
                 <p>${product['price_description']}</p>
                 <p>Rating: ${product['rating']}</p>
-                <button onclick="removeProductFromSelection('${product['product_name']}')">Remove</button>
+               <button> <p>View Product  : <a  href="${product['URL']}" target="_blank">Link</a>  </p> </button>
+                 <p>Available: ${product['availability']}</p> <!-- Fixed key reference -->
+            
             </div>
         `;
         selectedProductsDiv.innerHTML += productHTML;
@@ -233,3 +236,15 @@ function clearSuggestions() {
 
 // Add event listener for suggestions
 document.getElementById('search-input').addEventListener('input', showSuggestions);
+
+
+
+
+
+
+
+
+
+
+//----------------------- promotion 
+ 

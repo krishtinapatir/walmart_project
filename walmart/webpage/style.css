@@ -4,17 +4,19 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-    color: #333;
+
+  background: linear-gradient(to bottom, #003d50, #0099ff, #003d50);
+ max-height: 100vh;
 }
 .container {
-    width: 100%;
-    max-width: 1200px;
+    width: 200%;
+    max-width: 2400px;
     margin: 100 auto;
     padding: 100px;
     padding-top: 40px;
-    background: linear-gradient(to bottom, #003d50, #0099ff, #003d50); /* Gradient from dark blue to light blue to dark blue */
+
     border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 -10px 20px rgba(255, 255, 255, 0.3); /* Optional: shadow for 3D effect */
+
 }
 
 
@@ -26,7 +28,7 @@ body {
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 10px;
-    background: linear-gradient(to bottom, #003d50, #0099ff, #003d50); /* Gradient from dark blue to light blue to dark blue */
+    background: linear-gradient(to bottom, #3fb6bc, #0099ff98, #003d508d); /* Gradient from dark blue to light blue to dark blue */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 -6px 12px rgba(255, 255, 255, 0.2); /* Optional: shadow for 3D effect */
 }
 
@@ -56,17 +58,17 @@ body {
     top: 100%;
     left: 0;
     width: 5000px;
-    border: 1px solid #ccc;
-    background: linear-gradient(to bottom, #003d50, #0099ff, #003d50); /* Gradient from dark blue to light blue to dark blue */
+    border: 1px solid #fcfbfb;
+    background: linear-gradient(to bottom, #b7d1d8, #0099ffab, #003d50a0); /* Gradient from dark blue to light blue to dark blue */
     max-height: 200px;
     overflow-y: auto;
     z-index: 100;
     border-radius: 0 0 10px 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 -4px 8px rgba(255, 255, 255, 0.3); /* Optional: shadow for 3D effect */
+    box-shadow: 0 4px 8px rgba(167, 146, 146, 0.451), 0 -4px 8px rgba(255, 255, 255, 0.888); /* Optional: shadow for 3D effect */
 }
 
 .autocomplete-suggestion:hover {
-    background-color: #bb9595;
+    background-color: #ba6868;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Slightly stronger inner shadow on hover */
 }
 
@@ -110,6 +112,9 @@ body {
 }
 /*------------------------------------------------------------promotion section--------------------------------------------------------------------*/
 .carousel-container {
+    background-color: #003d50;
+ padding-right: 130px;
+ padding-left: 130px;
     position: relative;
     width: 100%;
     max-width: 800px;
@@ -361,9 +366,7 @@ h2 {
     margin: 100 auto;
     padding: 100px;
     padding-top: 40px;
-    background-color: #82b5b6;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #e5eef692;
 }
 
 /* -------------------------------------------------Search Bar------------------------------------------------------ */
@@ -441,7 +444,7 @@ h2 {
 
 /* --------------------------------------change -------------------------------------- */
 .suggestions-container {
-   
+ 
     top: 100%; /* Position below the search input */
     left: 0;
     width: 5000px;
@@ -464,5 +467,99 @@ h2 {
     background-color: #bb9595;
 }
 
+
+
+
+
+
+
+/* <!-- --------------------------------------------reviewicon -------------------------------------------- --> */
+
+.contact-icon {
+    position: absolute;
+    top: 45px;
+    right: 50px;
+    font-size: 24px;
+    color: #b33838;
+    border-color: #003d50;
+    text-decoration: none;
+ border-spacing: 30px;
+    z-index: 1000;
+    scale: 2.5;
+    border: 2px solid #003d50; /* Border color and thickness */
+    color: pink;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon:hover {
+    color: #f0c040; /* Change the color on hover */
+  transform: scale(1.2);
+}
+
+.contact-icon box-icon {
+    width: 32px;
+    height: 32px;
+}
+
+
+.review-pointer {
+    margin-top: 20px;
+   padding-right: 57px;
+    position: absolute;
+    top: 20px;
+    right: 70px; /* Adjust according to your icon's position */
+    display: flex;
+    align-items: center;
+    z-index: 1000;    font-size: 2rem;
+}
+
+.review-text {
+
+    /* font-family: 'Times New Roman', Times, serif; */
+    color: #1e0404;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.arrow {
+    color: #0e0101;
+    font-size: 30px;
+}
+
+/* <!-- --------------------------------------------review icon -------------------------------------------- --> */
+
+.butn{
+    align-items: center;
+    background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+    border: 0;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-family: "Codec cold",sans-serif;
+    font-size: 16px;
+    background-color: pink;
+    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-family: "Codec cold",sans-serif;
+}
+
+
+
+.selected-product-item h3 {
+    /* Ensure that text does not overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* Limit the text to two lines */
+    display: -webkit-box;
+   
+    -webkit-box-orient: vertical;
+    line-height: 1.2em; /* Adjust line-height according to your needs */
+    max-height: 2.4em; /* 1.2em * number of lines */
+}
 
 

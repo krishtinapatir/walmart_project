@@ -329,3 +329,15 @@ h3{
 .message.show {
     display: block;
 }
+
+
+
+
+
+
+.cout h3{
+
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }

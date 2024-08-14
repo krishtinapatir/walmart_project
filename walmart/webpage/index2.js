@@ -43,7 +43,7 @@ function displayResults(results) {
                 <p><b>Rating:</b> ${product['rating']}</p>
                 <p><b>Available:</b> EBT Available</p>
                 <button class="butn"><a href="${product['URL']}" target="_blank">View Product</a></button>
-                <button class="btn" data-product='${JSON.stringify(product).replace(/'/g, '&#39;')}'>Add to Selection</button>
+                <button class="button" data-product='${JSON.stringify(product).replace(/'/g, '&#39;')}'>Select Product</button>
                 <button class="redirect-btn" data-url="${product['URL']}">Track Price History</button>
             </div>
         `;
@@ -54,7 +54,7 @@ function displayResults(results) {
 }
 
 function setupEventListeners() {
-    document.querySelectorAll('.product-item .btn').forEach(button => {
+    document.querySelectorAll('.product-item .button').forEach(button => {
         button.addEventListener('click', function() {
             const product = JSON.parse(this.getAttribute('data-product'));
             addProductToSelection(product);
@@ -162,10 +162,11 @@ function displaySelectedProducts() {
             <div class="selected-product-item">
                 <img src="${product['image_url']}" alt="${product['product_name']}" />
                 <h3>${product['product_name']}</h3>
-                <p>${product['price_description']}</p>
-                <p>Rating: ${product['rating']}</p>
-                <button><a href="${product['URL']}" target="_blank">View Product</a></button>
-                <p>Available: ${product['availability']}</p>
+                <p><b>${product['price_description']}</b></p>
+                     <p><b>Rating:</b> ${product['rating']}</p> 
+                       <p>Available: ${product['availability']}</p>
+                <button class="butn"><a href="${product['URL']}" target="_blank">View Product</a></button>
+             
                 <button class="remove-btn" data-product-name="${product['product_name']}">Remove</button>
             </div>
         `;
@@ -232,10 +233,11 @@ function showBestOption() {
         bestProductDetails.innerHTML = `
             <div class="best-product-item">
                 <img src="${bestProduct['image_url']}" alt="${bestProduct['product_name']}" />
-                <h3>${bestProduct['product_name']}</h3>
-                <p>${bestProduct['price_description']}</p>
-                <p>Rating: ${bestProduct['rating']}</p>
-                <a href="${bestProduct['URL']}" target="_blank">View Product</a>
+                <h3><b>${bestProduct['product_name']}</b></h3>
+                <p><b>${bestProduct['price_description']}</b?</p>
+                <p><b>Rating:</b> ${bestProduct['rating']}</p>
+                
+                <a class="redirect-btn" href="${bestProduct['URL']}" target="_blank">View Product</a>
                 <p>Score: ${highestScore.toFixed(2)}</p>
             </div>
         `;
@@ -278,13 +280,3 @@ document.getElementById('search-input').addEventListener('input', showSuggestion
 
 
 
-
-
-
-
-
-
-
-
-//----------------------- promotion 
- 

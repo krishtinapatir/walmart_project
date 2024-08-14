@@ -46,6 +46,7 @@ function displayResults(results) {
                 <p> <b>Available:</b> EBT Available</p>
               <button class="butn">  <a href="${product['URL']}" target="_blank">View Product</a> </button>
                 <button class="btn" data-product='${JSON.stringify(product).replace(/'/g, '&#39;')}'>Add to Selection</button>
+                  <button class="redirect-btn" data-url="${product['URL']}">Track Price History</button>
             </div>
         `;
         productDetails.innerHTML += productHTML;
@@ -54,6 +55,7 @@ function displayResults(results) {
     setupEventListeners();
 }
 
+
 function setupEventListeners() {
     document.querySelectorAll('.product-item .btn').forEach(button => {
         button.addEventListener('click', function() {
@@ -61,7 +63,36 @@ function setupEventListeners() {
             addProductToSelection(product);
         });
     });
+
+    document.querySelectorAll('.product-item .redirect-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            redirectToWaltrack(url);
+        });
+    });
 }
+
+
+
+function redirectToWaltrack(url) {
+    let extractedNumber = "";
+
+    // Assuming the URL contains the 10-digit number you want to extract
+    let match = url.match(/\/(\d{9,10})\?/);
+
+    if (match) {
+        extractedNumber = match[1]; // Extract the number
+    }
+
+    if (extractedNumber) { // Check if a number was extracted
+        let newUrl = `https://waltrack.net/product/${extractedNumber}?ref=search`; // Correct URL format
+        window.location.href = newUrl;
+    } else {
+        alert("No valid product number found to redirect.");
+    }
+}
+
+
 
 function compareProducts() {
     const productItems = document.querySelectorAll('.product-item');

@@ -1,5 +1,3 @@
-
-
 let products = [];
 
 // Load all JSON data files simultaneously
@@ -43,10 +41,10 @@ function displayResults(results) {
                 <h3>${product['product_name']}</h3>
                 <p><b>${product['price_description']}</b></p>
                 <p><b>Rating:</b> ${product['rating']}</p>
-                <p> <b>Available:</b> EBT Available</p>
-              <button class="butn">  <a href="${product['URL']}" target="_blank">View Product</a> </button>
+                <p><b>Available:</b> EBT Available</p>
+                <button class="butn"><a href="${product['URL']}" target="_blank">View Product</a></button>
                 <button class="btn" data-product='${JSON.stringify(product).replace(/'/g, '&#39;')}'>Add to Selection</button>
-                  <button class="redirect-btn" data-url="${product['URL']}">Track Price History</button>
+                <button class="redirect-btn" data-url="${product['URL']}">Track Price History</button>
             </div>
         `;
         productDetails.innerHTML += productHTML;
@@ -54,7 +52,6 @@ function displayResults(results) {
 
     setupEventListeners();
 }
-
 
 function setupEventListeners() {
     document.querySelectorAll('.product-item .btn').forEach(button => {
@@ -71,8 +68,6 @@ function setupEventListeners() {
         });
     });
 }
-
-
 
 function redirectToWaltrack(url) {
     let extractedNumber = "";
@@ -91,8 +86,6 @@ function redirectToWaltrack(url) {
         alert("No valid product number found to redirect.");
     }
 }
-
-
 
 function compareProducts() {
     const productItems = document.querySelectorAll('.product-item');
@@ -171,15 +164,27 @@ function displaySelectedProducts() {
                 <h3>${product['product_name']}</h3>
                 <p>${product['price_description']}</p>
                 <p>Rating: ${product['rating']}</p>
-               <button> <p>View Product  : <a  href="${product['URL']}" target="_blank">Link</a>  </p> </button>
-                 <p>Available: ${product['availability']}</p> <!-- Fixed key reference -->
-            
+                <button><a href="${product['URL']}" target="_blank">View Product</a></button>
+                <p>Available: ${product['availability']}</p>
+                <button class="remove-btn" data-product-name="${product['product_name']}">Remove</button>
             </div>
         `;
         selectedProductsDiv.innerHTML += productHTML;
     });
 
     console.log('Selected products:', selectedProducts); // Debugging
+    setupRemoveButtonListeners();
+}
+
+function setupRemoveButtonListeners() {
+    const removeButtons = document.querySelectorAll('.selected-product-item .remove-btn');
+
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productName = this.getAttribute('data-product-name');
+            removeProductFromSelection(productName);
+        });
+    });
 }
 
 function showBestOption() {
@@ -193,9 +198,15 @@ function showBestOption() {
     const ratingWeight = 0.6;
 
     function calculateScore(product) {
-        const price = parseFloat(product['price_description'].replace(/[^0-9.-]+/g, ""));
-        const rating = parseFloat(product['rating']);
-        
+        const priceText = product['price_description'] || '';
+        const ratingText = product['rating'] || '';
+
+        // Extract numeric values
+        const price = parseFloat(priceText.replace(/[^0-9.-]+/g, "")) || 0;
+        const rating = parseFloat(ratingText) || 0;
+
+        console.log(`Calculating score for ${product['product_name']}: Price = ${price}, Rating = ${rating}`); // Debugging
+
         // Normalize price (lower price is better)
         const normalizedPrice = 1 / (1 + price); // Inverse normalization
         // Normalize rating (higher rating is better)
@@ -204,30 +215,34 @@ function showBestOption() {
         return (normalizedPrice * priceWeight) + (normalizedRating * ratingWeight);
     }
 
-    let bestProduct = selectedProducts[0]; 
+    let bestProduct = selectedProducts[0];
     let highestScore = calculateScore(bestProduct);
 
     selectedProducts.forEach(product => {
         const score = calculateScore(product);
-        console.log('Product score:', product['product_name'], score); // Debugging
+        console.log(`Product: ${product['product_name']}, Score: ${score}`); // Debugging
         if (score > highestScore) {
             highestScore = score;
             bestProduct = product;
         }
     });
 
-    const bestProductDetails = document.getElementById('best-product-details');
-    bestProductDetails.innerHTML = `
-        <div class="best-product-item">
-            <img src="${bestProduct['image_url']}" alt="${bestProduct['product_name']}" />
-            <h3>${bestProduct['product_name']}</h3>
-            <p>${bestProduct['price_description']}</p>
-            <p>Rating: ${bestProduct['rating']}</p>
-            <a href="${bestProduct['URL']}" target="_blank">View Product</a>
-            <p>Score: ${highestScore.toFixed(2)}</p>
-        </div>
-    `;
-    console.log('Best product selected:', bestProduct); // Debugging
+    if (bestProduct) {
+        const bestProductDetails = document.getElementById('best-product-details');
+        bestProductDetails.innerHTML = `
+            <div class="best-product-item">
+                <img src="${bestProduct['image_url']}" alt="${bestProduct['product_name']}" />
+                <h3>${bestProduct['product_name']}</h3>
+                <p>${bestProduct['price_description']}</p>
+                <p>Rating: ${bestProduct['rating']}</p>
+                <a href="${bestProduct['URL']}" target="_blank">View Product</a>
+                <p>Score: ${highestScore.toFixed(2)}</p>
+            </div>
+        `;
+        console.log('Best product selected:', bestProduct); // Debugging
+    } else {
+        document.getElementById('best-product-details').innerHTML = '<p>No valid product found.</p>';
+    }
 }
 
 
@@ -241,32 +256,26 @@ function showSuggestions() {
     if (query.length === 0) return;
 
     const filteredProducts = products.filter(product =>
-        product["product_name"].toLowerCase().includes(query) 
+        product["product_name"].toLowerCase().includes(query)
     );
 
+    // Limit to 5 suggestions
+    const limitedSuggestions = filteredProducts.slice(0, 5);
 
-     // Limit to 5 suggestions
-     const limitedSuggestions = filteredProducts.slice(0, 5);
-
-     limitedSuggestions.forEach(product => {
+    limitedSuggestions.forEach(product => {
         const suggestionDiv = document.createElement('div');
         suggestionDiv.classList.add('autocomplete-suggestion');
-        suggestionDiv.textContent = product["product_name"]; 
+        suggestionDiv.textContent = product["product_name"];
         suggestionDiv.onclick = () => {
-            input.value = product["product_name"]; 
-            suggestionsContainer.innerHTML = ''; 
-            searchProduct();
+            input.value = product["product_name"];
+            suggestionsContainer.innerHTML = '';
         };
         suggestionsContainer.appendChild(suggestionDiv);
     });
 }
 
-function clearSuggestions() {
-    document.getElementById('suggestions-container').innerHTML = '';
-}
-
-// Add event listener for suggestions
 document.getElementById('search-input').addEventListener('input', showSuggestions);
+
 
 
 

@@ -1,11 +1,11 @@
-/* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-
-  background: linear-gradient(to bottom, #003d50, #0099ff, #003d50);
+    
+    background: #f4f4f4;
+  background-color: #3d97f656;
+ 
  max-height: 100vh;
 }
 .container {
@@ -28,8 +28,8 @@ body {
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 10px;
-    background: linear-gradient(to bottom, #3fb6bc, #0099ff98, #003d508d); /* Gradient from dark blue to light blue to dark blue */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 -6px 12px rgba(255, 255, 255, 0.2); /* Optional: shadow for 3D effect */
+    background: #0a2845; 
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1), 0 -6px 12px rgba(255, 255, 255, 0.2); Optional: shadow for 3D effect */
 }
 
 /*-------------------------------------------------------------------------- CSS for the close icon--------------------------------------------- */
@@ -59,7 +59,7 @@ body {
     left: 0;
     width: 5000px;
     border: 1px solid #fcfbfb;
-    background: linear-gradient(to bottom, #b7d1d8, #0099ffab, #003d50a0); /* Gradient from dark blue to light blue to dark blue */
+    background: linear-gradient(to bottom, #b7d1d8, #0099ffab, #003d50a0); 
     max-height: 200px;
     overflow-y: auto;
     z-index: 100;
@@ -112,12 +112,9 @@ body {
 }
 /*------------------------------------------------------------promotion section--------------------------------------------------------------------*/
 .carousel-container {
-    background-color: #003d50;
- padding-right: 130px;
- padding-left: 130px;
     position: relative;
-    width: 100%;
-    max-width: 800px;
+    width: 200%;
+    max-width: 1000px;
     margin: auto;
     overflow: hidden;
 }
@@ -137,16 +134,16 @@ body {
     display: flex;
     min-width: 100%;
     justify-content: flex-start; /* Adjust to align items */
-    gap: 10px; /* Space between slides, adjust as needed */
+    gap: px; /* Space between slides, adjust as needed */
 }
 
 .carousel-slide img {
     width: 49%; /* Adjusted to reduce the gap between images */
-    border-radius: 8px;
+    border-radius: px;
 }
 
 .carousel-slide img:nth-child(odd) {
-    margin-bottom: 10px; /* Gap below each image */
+    margin-bottom: px; /* Gap below each image */
 }
 
 .carousel-button {
@@ -169,6 +166,8 @@ body {
     right: 0;
 }
 
+
+
 /* ---------------------------------------------------Flexbox container for products */
 #product-details, #selected-products, #best-product-details {
     display: flex;
@@ -176,7 +175,7 @@ body {
     justify-content: space-around;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 70%;
+    width: 80%;
 }
 
 /* ---------------------------------------------------------------------Styling for individual product items */
@@ -187,7 +186,7 @@ body {
     align-items: center; /* Vertically center items */
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 70%; /* Adjust based on your layout */
+    width: 80%; /* Adjust based on your layout */
     margin-left: auto;
     margin-right: auto;
 }
@@ -236,7 +235,13 @@ body {
     display: block; /* Makes the button a block-level element so that auto margin works */
 }
 
-
+.recommendation-section h2{
+    font-family: "Grey Qo", cursive;
+  font-weight: 700;
+    /* font-weight: 800; */
+    font-style: normal;
+    font-size: 2.8rem;
+}
 
 
 /* Responsive design */
@@ -250,6 +255,14 @@ body {
     .product-item, .selected-product-item, .best-product-item {
         flex: 1 1 100%; /* 1 item per row on small screens */
     }
+}
+
+.best-product-section h2{
+    font-family: "Grey Qo", cursive;
+    font-weight: 700;
+      /* font-weight: 800; */
+      font-style: normal;
+      font-size: 2.8rem;
 }
 
 /* Section headings */
@@ -378,7 +391,7 @@ h2 {
     margin-bottom: 20px;
     padding: 15px; /* Increased padding */
     border-radius: 10px; /* Slightly larger border radius */
-    background-color: #9bbfcb; /* Light blue background */
+    background: #537ea9; /* Light blue background */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased box shadow for more depth */
 }
 
@@ -398,7 +411,7 @@ h2 {
 }
 
 .btn {
-    padding: 15px 30px; /* Increased padding */
+    padding: 18px 30px; /* Increased padding */
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -440,7 +453,7 @@ h2 {
 .autocomplete-suggestion:hover {
     background-color: #b3e0ff; /* Slightly darker blue on hover */
 }
-/* Search Bar */
+
 
 /* --------------------------------------change -------------------------------------- */
 .suggestions-container {
@@ -474,18 +487,35 @@ h2 {
 
 
 /* <!-- --------------------------------------------reviewicon -------------------------------------------- --> */
+.product-item {
+    text-align: center;
+}
+
+.butn {
+    display: inline-block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.butn a {
+    text-decoration: none;
+    color: white; 
+}
 
 .contact-icon {
-     position:fixed;
-    top: 45px;
-    right: 50px;
-    font-size: 24px;
+    position:fixed;
+    /* position: absolute; */
+    top: -20px;
+    right: -20px;
+    margin-right: 0px;
+    padding-right: 0px;
+    /* font-size: 24px; */
     color: #b33838;
     border-color: #003d50;
     text-decoration: none;
- border-spacing: 30px;
-    z-index: 1000;
-    scale: 2.5;
+ /* border-spacing: 30px; */
+    z-index: 1200;
+    scale: 0.5;
     border: 2px solid #003d50; /* Border color and thickness */
     color: pink;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -497,12 +527,13 @@ h2 {
 }
 
 .contact-icon box-icon {
-    width: 32px;
-    height: 32px;
+    width: 12px;
+    height: 12px;
 }
 
 
 .review-pointer {
+
     margin-top: 20px;
    padding-right: 57px;
     position: absolute;
@@ -514,10 +545,10 @@ h2 {
 }
 
 .review-text {
-
-    /* font-family: 'Times New Roman', Times, serif; */
-    color: #1e0404;
-    font-size: 16px;
+    
+    font-family: 'Times New Roman', Times, serif;
+    color: #ffffff;
+    font-size: 25px;
     margin-right: 5px;
 }
 
@@ -526,13 +557,15 @@ h2 {
     font-size: 30px;
 }
 
-/* <!-- --------------------------------------------review icon -------------------------------------------- --> */
+/* <!-- --------------------------------------------view product icon -------------------------------------------- --> */
 
 .butn{
     align-items: center;
-/*     background-image: linear-gradient(135deg, #f34079 40%, #fc894d); */
-    border: 0;
-    padding: 20px;
+    /* background-image: linear-gradient(135deg, #f34079 40%, #fc894d); */
+    border: 2;
+    border-color: black;
+    border-spacing: 200cap;
+    padding: 12px;
     border-radius: 10px;
     box-sizing: border-box;
     color: #fff;
@@ -540,14 +573,17 @@ h2 {
     display: flex;
     flex-direction: column;
     font-family: "Codec cold",sans-serif;
-    font-size: 16px;
-    background-color: #537ea9;
+    font-size: 1.2rem;
+    background-color: #35c26b;
     cursor: pointer;
   display: flex;
   flex-direction: column;
   font-family: "Codec cold",sans-serif;
+  margin-bottom: 5px;
 }
-
+.butn:hover{
+    background-color: #0b632df0; 
+}
 
 
 .selected-product-item h3 {
@@ -556,32 +592,102 @@ h2 {
     text-overflow: ellipsis;
     /* Limit the text to two lines */
     display: -webkit-box;
-   
+    /* -webkit-line-clamp: 2; */
     -webkit-box-orient: vertical;
     line-height: 1.2em; /* Adjust line-height according to your needs */
     max-height: 2.4em; /* 1.2em * number of lines */
 }
 
+.redirect-btn {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0; /* Remove the left padding */
+    align-items: center; /* Center the button's content */
+    justify-content: center; /* Center the button itself */
+    background-image: linear-gradient(#0dccea, #0d70ea);
+    border: 2;
+    border-color: black;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    font-family: Montserrat, sans-serif;
+    font-size: 1rem;
+    margin: 5px auto; /* Center the button within the container */
+    padding: 10px 55px;
+    text-align: center;
+    width: fit-content; /* Optional: Adjust the width as needed */
+    
+  }
 
-.redirect-btn{
- display: flex;
- flex-direction: column;
- flex-direction: column;
- margin-left: 200px;
- align-items: center;
-  background-image: linear-gradient(#0dccea, #0d70ea);
-  border: 0;
-  border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-family: Montserrat,sans-serif;
-  font-size: .9em;
-  margin: 5px;
-  padding: 10px 15px;
-  text-align: center;
-
-
+.redirect-btn:hover{
+    background-image: linear-gradient(#0d70ea,#0dccea); 
 }
+
+/* Header Styling */
+.header {
+    background-color: #0071ce; /* Walmart blue color */
+    padding: 5px 50px;
+ padding-bottom: 25px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, #084d7e, #016bb2, #0f397b);
+    justify-content: flex-start;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    padding-top: 20px;
+    height: 50px; /* Adjust the size of the logo */
+    margin-right: 10px;
+    size: 2rem;
+}
+
+.brand-name {
+    font-size: 3rem;
+ 
+padding-top: 15px;
+    color: white;
+    margin: 0;
+}
+.button{
+    padding: 10px 30px; /* Increased padding */
+    background-color: #007bff;
+    color: #fff;
+    border: 3;
+    border-color: black;
+    border: none;
+    border-radius: 10px; /* Matching border radius */
+    cursor: pointer;
+    font-size: 18px; /* Increased font size */
+    box-shadow: 0 6px 8px rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 12px rgba(0, 86, 179, 0.4);
+}
+
+
+
+.remove-btn{
+    padding: 10px 50px; /* Increased padding */
+    background-color: #f23a49;
+    color: #ffffff;
+    border: 3;
+    border-color: black;
+    border: none;
+    border-radius: 10px; /* Matching border radius */
+    cursor: pointer;
+    font-size: 18px; /* Increased font size */
+    box-shadow: 0 6px 8px rgba(0, 123, 255, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+}
+
 

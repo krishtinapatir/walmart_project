@@ -8,17 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <header class="header">
+        <div class="logo-container">
+            <img src="images/walmart.png" alt="Walmart Logo" class="logo">
+            <h1 class="brand-name">Walmart</h1>
+        </div>
+    </header>
+
     <div class="container">
         <!-- --------------------------------------------reviewicon -------------------------------------------- -->
         <div class="review-pointer">
             <span class="review-text">Write Review</span>
             <span class="arrow">➤</span>
         </div>
-        <a href="review_page/index.html" class="contact-icon" title="Contact Us">
-            <box-icon name='message' type='solid' color='#ffffff'></box-icon> 
-       
-        </a>
     
+        <a href="review_page/index.html">
+            <img src="images/review.png" alt="Walmart Logo" class="contact-icon" title="Contact Us">
+        </a>
+        
           <!-- --------------------------------------------reviewicon -------------------------------------------- -->
         <div class="search-bar">
             <input type="text" id="search-input" class="search-box" required placeholder="Search for products..." />
@@ -38,6 +46,10 @@
     <div class="image-carousel">
         <div class="carousel-track">
             <div class="carousel-slide">
+                <img src="images/Screenshot (500).png" alt="Description of image 3">
+                <img src="images/Screenshot (501).png" alt="Description of image 4">
+            </div> 
+            <div class="carousel-slide">
                 <img src="images/Screenshot (502).png" alt="Description of image 1">
                 <img src="images/Screenshot (503).png" alt="Description of image 2">
             </div>
@@ -45,10 +57,7 @@
                 <img src="images/Screenshot (504).png" alt="Description of image 3">
                 <img src="images/walmart-discount-card-promotion.jpg.webp" alt="Description of image 4">
             </div>
-            <div class="carousel-slide">
-                <img src="images/Screenshot (500).png" alt="Description of image 3">
-                <img src="images/Screenshot (501).png" alt="Description of image 4">
-            </div>
+           
             <div class="carousel-slide">
                 <img src="images/Screenshot (498).png" alt="Description of image 3">
                 <img src="images/Screenshot (499).png" alt="Description of image 4">
@@ -107,33 +116,24 @@
 
 
 <!------------------------------------------------------------------- whats best -->
-        <div class="recommendation-section">
-            <h2>Add and See What's Best for You</h2>
+
+        <div class="recommendation-section"> <hr>
+            <h2><u> Select Add and See What's Best for You</u></h2>
             <div id="selected-products">
-                <!-- Selected products will be displayed here -->
+                
             </div>
             <button class="btn" onclick="showBestOption()">See Best Option</button>
         </div>
 
         <div class="best-product-section">
-            <h2>Best Product Recommendation</h2>
+          <hr>  <h2><u>Best Product Recommendation</u></h2>
             <div id="best-product-details">
-                <!-- Best product details will be displayed here -->
+                
             </div>
         </div>
-        
-        <div class="Review-container">
-            <button class="btn">Review</button>
-            <div id="Review-details">
-                <!-- --Review-details ---->
-            </div>
-        </div>
+ 
 
-
-        <!-- ---------------------------------Similar products will be displayed here -------------------------------------------->
-        <!-- <div class="similar-products" id="similar-products">
-           
-        </div> -->
+      
     </div>
 
 
@@ -158,3 +158,5 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
 </html>
+
+

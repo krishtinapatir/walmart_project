@@ -19,7 +19,9 @@ body {
 
 }
 
-
+.back{
+    margin-left: 30px;
+}
 .search-bar {
     position: relative;
     display: flex;
